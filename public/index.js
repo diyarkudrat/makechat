@@ -30,6 +30,15 @@ $(document).ready(()=>{
         $('#chat-input').val("");
       }
     });
+
+    $('#new-channel-btn').click(() => {
+      let newChannel = $('#new-channel-input').val();
+
+      if (newChannel.length > 0) {
+        socket.emit('new channel', newChannel);
+        $('#new-channel-input').val("");
+      }
+    });
   
     //socket listeners
     socket.on('new user', (username) => {

@@ -22,4 +22,8 @@ module.exports = (io, socket) => {
     delete onlineUsers[socket.username]
     io.emit(`${socket.username} has left`, onlineUsers);
   });
+
+  socket.on('new channel', (newChannel) => {
+    console.log(newChannel);
+  })
 };
