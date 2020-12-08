@@ -18,7 +18,7 @@ $(document).ready(()=>{
   
     $('#send-chat-btn').click((e) => {
       e.preventDefault();
-      // Get the message text value
+      let channel = $('.channel-current').text();
       let message = $('#chat-input').val();
       // Make sure it's not empty
       if(message.length > 0){
@@ -26,6 +26,7 @@ $(document).ready(()=>{
         socket.emit('new message', {
           sender : currentUser,
           message : message,
+          channel : channel
         });
         $('#chat-input').val("");
       }
@@ -48,12 +49,15 @@ $(document).ready(()=>{
 
     //Output the new message
     socket.on('new message', (data) => {
+      let currentChannel = $('.channel-current').text();
+      if(currentChannel == data.channel){
         $('.message-container').append(`
-        <div class="message">
+          <div class="message">
             <p class="message-user">${data.sender}: </p>
             <p class="message-text">${data.message}</p>
-        </div>
+          </div>
         `);
+      }
     });
 
     socket.on('get online users', (onlineUsers) => {

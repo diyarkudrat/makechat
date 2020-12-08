@@ -9,8 +9,7 @@ module.exports = (io, socket, onlineUsers, channels) => {
 
   //Listen for new messages
   socket.on('new message', (data) => {
-    // Send that data back to ALL clients
-    console.log(`🎤 ${data.sender}: ${data.message} 🎤`)
+    channels[data.channel].push({sender : data.sender, message : data.message});
     io.emit('new message', data);
   });
 
