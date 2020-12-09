@@ -72,6 +72,12 @@ $(document).ready(()=>{
       }
     });
 
+    socket.on('get all channels', (channels) => {
+      for (channel in channels) {
+        $('.all-channels').append(`<div class="channel">${channel.channel}</div>`)
+      }
+    })
+
     socket.on('user has left', (onlineUsers) => {
       $('.users-online').append(`<p>${username}</p>`)
     });
